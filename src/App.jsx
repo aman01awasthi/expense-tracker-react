@@ -18,6 +18,11 @@ function App() {
     setEditExpense(expense);
   }
 
+  const handleUpdateExpense = (updatedExpense) =>{
+    setExpenses((expenses.map( (expense) => expense.id === updatedExpense.id ? {...updatedExpense, amount: Number(updatedExpense.amount)} : expense)))
+    setEditExpense(null);
+  }
+
   const handleAddExpense = (newExpense) => {
     setExpenses((prev) => [
       ...prev,
@@ -39,7 +44,7 @@ function App() {
 
   return (
     <>
-      <ExpenseForm key={editExpense ? editExpense.id : 'new'} onAddExpense={handleAddExpense} onEditExpense={handleEditExpense} editExpense={editExpense}/>
+      <ExpenseForm key={editExpense ? editExpense.id : 'new'} onAddExpense={handleAddExpense} onEditExpense={handleUpdateExpense} editExpense={editExpense}/>
       <br />
       <CategoryFilter
         onCategoryChange={setSelectedCategory}
