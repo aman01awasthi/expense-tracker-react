@@ -1,4 +1,4 @@
-const ExpenseItem = ({data, del}) => {
+const ExpenseItem = ({data, del, onEditExpense}) => {
 
     return(
         <>
@@ -7,6 +7,7 @@ const ExpenseItem = ({data, del}) => {
             <p>{data.category}</p>
             <p>{data.amount}</p>
             <button type="button" onClick={()=> del(data.id)}>Delete</button>
+            <button type="button" onClick={()=> onEditExpense(data)}>Edit</button>
         </div>
         </>
     )

@@ -12,6 +12,12 @@ function App() {
   });
   const [selectedCategory, setSelectedCategory] = useState("");
 
+  const [editExpense, setEditExpense] = useState(null);
+
+  const handleEditExpense =(expense) => {
+    setEditExpense(expense);
+  }
+
   const handleAddExpense = (newExpense) => {
     setExpenses((prev) => [
       ...prev,
@@ -33,13 +39,13 @@ function App() {
 
   return (
     <>
-      <ExpenseForm onAddExpense={handleAddExpense} />
+      <ExpenseForm key={editExpense ? editExpense.id : 'new'} onAddExpense={handleAddExpense} onEditExpense={handleEditExpense} editExpense={editExpense}/>
       <br />
       <CategoryFilter
         onCategoryChange={setSelectedCategory}
         selectedCategory={selectedCategory}
       />
-      <ExpenseList data={filteredCategory} del={handleDeleteExpense} />
+      <ExpenseList data={filteredCategory} del={handleDeleteExpense} onEditExpense={handleEditExpense} editExpense={editExpense}/>
       <ExpenseTotal data={expenses} />
     </>
   );

@@ -1,11 +1,11 @@
 import ExpenseItem from "./ExpenseItem";
 
-const ExpenseList = ({data, del}) =>{
+const ExpenseList = ({data, del, onEditExpense}) =>{
     
     return(
         <>
         {data.map((expense) => (
-            <ExpenseItem key={expense.id} data={expense} del={del}/>
+            <ExpenseItem key={expense.id} data={expense} del={del} onEditExpense={onEditExpense}/>
         ))}
         </>
     )

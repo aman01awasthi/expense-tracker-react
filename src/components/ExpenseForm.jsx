@@ -4,21 +4,29 @@
 
 import { useState } from "react";
 
-const ExpenseForm = ({onAddExpense}) => {
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
-  const [amount, setAmount] = useState('');
+const ExpenseForm = ({onAddExpense, onEditExpense, editExpense}) => {
+  const [name, setName] = useState(editExpense ? editExpense.name : '');
+  const [category, setCategory] = useState(editExpense ? editExpense.category : '');
+  const [amount, setAmount] = useState(editExpense ? editExpense.amount : '');
 
   const addName = (e) => {setName(e.target.value)};
   const addCategory = (e) => {setCategory(e.target.value)};
   const addAmount = (e) => {setAmount(e.target.value)};
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    onAddExpense({name, category, amount});
-    setName('');
-    setCategory('');
-    setAmount('');
+    if(editExpense){
+      e.preventDefault();
+      onEditExpense({id: editExpense.id, name, category, amount});
+      setName('');
+      setCategory('');
+      setAmount('');
+    } else{
+      e.preventDefault();
+      onAddExpense({name, category, amount});
+      setName('');
+      setCategory('');
+      setAmount('');
+    }
   }
 
   return (
