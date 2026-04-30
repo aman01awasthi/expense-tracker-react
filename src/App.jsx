@@ -14,14 +14,20 @@ function App() {
 
   const [editExpense, setEditExpense] = useState(null);
 
-  const handleEditExpense =(expense) => {
+  const handleEditExpense = (expense) => {
     setEditExpense(expense);
-  }
+  };
 
-  const handleUpdateExpense = (updatedExpense) =>{
-    setExpenses((expenses.map( (expense) => expense.id === updatedExpense.id ? {...updatedExpense, amount: Number(updatedExpense.amount)} : expense)))
+  const handleUpdateExpense = (updatedExpense) => {
+    setExpenses(
+      expenses.map((expense) =>
+        expense.id === updatedExpense.id
+          ? { ...updatedExpense, amount: Number(updatedExpense.amount) }
+          : expense,
+      ),
+    );
     setEditExpense(null);
-  }
+  };
 
   const handleAddExpense = (newExpense) => {
     setExpenses((prev) => [
@@ -44,14 +50,26 @@ function App() {
 
   return (
     <>
-      <ExpenseForm key={editExpense ? editExpense.id : 'new'} onAddExpense={handleAddExpense} onEditExpense={handleUpdateExpense} editExpense={editExpense}/>
-      <br />
-      <CategoryFilter
-        onCategoryChange={setSelectedCategory}
-        selectedCategory={selectedCategory}
-      />
-      <ExpenseList data={filteredCategory} del={handleDeleteExpense} onEditExpense={handleEditExpense} editExpense={editExpense}/>
-      <ExpenseTotal data={expenses} />
+      <div className="min-h-screen bg-gray-100 p-6">
+        <ExpenseForm
+          key={editExpense ? editExpense.id : "new"}
+          onAddExpense={handleAddExpense}
+          onEditExpense={handleUpdateExpense}
+          editExpense={editExpense}
+        />
+        <br />
+        <CategoryFilter
+          onCategoryChange={setSelectedCategory}
+          selectedCategory={selectedCategory}
+        />
+        <ExpenseList
+          data={filteredCategory}
+          del={handleDeleteExpense}
+          onEditExpense={handleEditExpense}
+          editExpense={editExpense}
+        />
+        <ExpenseTotal data={expenses} />
+      </div>
     </>
   );
 }
