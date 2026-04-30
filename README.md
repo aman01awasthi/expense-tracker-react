@@ -1,16 +1,40 @@
-# React + Vite
+# Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack React application to track personal expenses with real-time filtering, editing, and persistent storage.
 
-Currently, two official plugins are available:
+## Live Demo
+[View on Vercel](https://expense-tracker-react-olive-ten.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- Add expenses with name, category, and amount
+- Edit and delete existing expenses
+- Filter expenses by category in real time
+- Running total updates automatically
+- Data persists on page refresh using localStorage
 
-## React Compiler
+## Tech Stack
+- React 18 (Vite)
+- Tailwind CSS
+- localStorage for persistence
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Concepts Used
+- useState — controlled inputs, CRUD state management
+- useEffect — localStorage sync
+- Props & callbacks — data flows down, events flow up
+- Derived state — filtered list and total calculated from source state
+- Lazy initializer — load localStorage before first render
 
-## Expanding the ESLint configuration
+## Components
+- `ExpenseForm` — controlled form for adding and editing expenses
+- `ExpenseList` — renders list of ExpenseItem components
+- `ExpenseItem` — displays individual expense with edit and delete
+- `ExpenseTotal` — calculates and displays running total using reduce
+- `CategoryFilter` — filters expense list by category
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+```bash
+git clone https://github.com/aman01awasthi/expense-tracker
+cd expense-tracker
+npm install
+npm run dev
+```
