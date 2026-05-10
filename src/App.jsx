@@ -4,10 +4,13 @@ import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import ExpenseTotal from "./components/ExpenseTotal";
 import CategoryFilter from "./components/CategoryFilter";
+import Login from "./pages/Login";
 import { useTheme } from "./context/ThemeContext";
 import { Sun, Moon } from 'lucide-react';
+import {useLogin} from "./context/AuthContext";
 
 function App() {
+  const {user} = useLogin();
   const {theme, setTheme} = useTheme();
   const [expenses, setExpenses] = useState(() => {
     const stored = localStorage.getItem("expenses");
@@ -53,6 +56,7 @@ function App() {
 
   return (
     <>
+    {!user ? <Login/> :
       <div className={`min-h-screen p-6 ${theme === 'light' ? 'bg-gray-100' : 'bg-gray-900'}`}>
         <button className="fixed bottom-6 right-6 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
           {theme === 'light' ? <Moon size={20} /> : <Sun size={20} color="white"/>}
@@ -77,6 +81,7 @@ function App() {
         />
         <ExpenseTotal data={expenses} />
       </div>
+}
     </>
   );
 }
