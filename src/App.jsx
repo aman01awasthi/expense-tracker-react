@@ -9,14 +9,12 @@ import { useTheme } from "./context/ThemeContext";
 import { Sun, Moon } from "lucide-react";
 import { useLogin } from "./context/AuthContext";
 import Navbar from "./components/Navbar/Navbar";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
   const { user } = useLogin();
   const { theme, setTheme } = useTheme();
-  const [expenses, setExpenses] = useState(() => {
-    const stored = localStorage.getItem("expenses");
-    return stored ? JSON.parse(stored) : [];
-  });
+  const [expenses, setExpenses] = useLocalStorage("expenses", []);
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const [editExpense, setEditExpense] = useState(null);
@@ -43,10 +41,6 @@ function App() {
     ]);
   };
 
-  useEffect(() => {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
-
   const handleDeleteExpense = (id) => {
     setExpenses(expenses.filter((expense) => expense.id !== id));
   };
@@ -63,7 +57,6 @@ function App() {
         <div
           className={`min-h-screen p-6 ${theme === "light" ? "bg-gray-100" : "bg-gray-900"}`}
         >
-
           <button
             className="fixed bottom-6 right-6 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
@@ -74,7 +67,7 @@ function App() {
               <Sun size={20} color="white" />
             )}
           </button>
-<Navbar/>
+          <Navbar />
           <ExpenseForm
             key={editExpense ? editExpense.id : "new"}
             onAddExpense={handleAddExpense}
