@@ -30,7 +30,6 @@ const ExpenseForm = ({ onAddExpense, onEditExpense, editExpense }) => {
     if (!name.trim()) newErrors.name = "Name is required";
     if (!category.trim()) newErrors.category = "Category is required";
     if (!amount.trim()) newErrors.amount = "Amount is required";
-    setErrors(newErrors);
 
     if (Object.values(newErrors).some(e => e !== "")) {
       setErrors(newErrors);
