@@ -5,6 +5,9 @@ const Login = () => {
   const { login } = useLogin();
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -14,6 +17,16 @@ const Login = () => {
         <div className="mb-4">
           <label htmlFor="name" className="text-sm font-medium text-gray-700 mb-1 block">Name</label>
           <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} className="border rounded-lg p-2 w-full" placeholder="Enter your name"/>
+        </div>
+        
+        <div className="mb-4">
+          <label htmlFor="email" className="text-sm font-medium text-gray-700 mb-1 block">Email</label>
+          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border rounded-lg p-2 w-full" placeholder="Enter your email"/>
+        </div>
+        
+        <div className="mb-4">
+          <label htmlFor="password" className="text-sm font-medium text-gray-700 mb-1 block">Password</label>
+          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="border rounded-lg p-2 w-full" placeholder="Enter your password"/>
         </div>
 
         <div className="mb-6">
