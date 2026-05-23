@@ -3,39 +3,86 @@ import { useLogin } from "../context/AuthContext";
 
 const Login = () => {
   const { login } = useLogin();
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`https://reqres.in/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed");
+      }
+
+      login(data.token);
+    } catch (err) {
+      setError(err.message || "Enter valid details");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white rounded-xl shadow-md p-8 w-full max-w-sm">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Welcome Back</h2>
-        
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          Welcome Back
+        </h2>
+
+        {error && (
+          <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+        )}
+
         <div className="mb-4">
-          <label htmlFor="name" className="text-sm font-medium text-gray-700 mb-1 block">Name</label>
-          <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} className="border rounded-lg p-2 w-full" placeholder="Enter your name"/>
-        </div>
-        
-        <div className="mb-4">
-          <label htmlFor="email" className="text-sm font-medium text-gray-700 mb-1 block">Email</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border rounded-lg p-2 w-full" placeholder="Enter your email"/>
-        </div>
-        
-        <div className="mb-4">
-          <label htmlFor="password" className="text-sm font-medium text-gray-700 mb-1 block">Password</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="border rounded-lg p-2 w-full" placeholder="Enter your password"/>
+          <label
+            htmlFor="email"
+            className="text-sm font-medium text-gray-700 mb-1 block"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="border rounded-lg p-2 w-full"
+            placeholder="Enter your email"
+          />
         </div>
 
-        <div className="mb-6">
-          <label htmlFor="role" className="text-sm font-medium text-gray-700 mb-1 block">Role</label>
-          <input type="text" id="role" value={role} onChange={(e) => setRole(e.target.value)} className="border rounded-lg p-2 w-full" placeholder="e.g. Admin, User"/>
+        <div className="mb-4">
+          <label
+            htmlFor="password"
+            className="text-sm font-medium text-gray-700 mb-1 block"
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="border rounded-lg p-2 w-full"
+            placeholder="Enter your password"
+          />
         </div>
 
-        <button onClick={() => login({name, role})} className="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition">
-          Login
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition disabled:opacity-50"
+        >
+          {loading ? "Logging in..." : "Login"}
         </button>
       </div>
     </div>
