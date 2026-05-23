@@ -39,51 +39,52 @@ const Login = () => {
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Welcome Back
         </h2>
+        <form onSubmit={handleSubmit}>
+          {error && (
+            <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+          )}
 
-        {error && (
-          <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
-        )}
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="text-sm font-medium text-gray-700 mb-1 block"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border rounded-lg p-2 w-full"
+              placeholder="Enter your email"
+            />
+          </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="text-sm font-medium text-gray-700 mb-1 block"
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="text-sm font-medium text-gray-700 mb-1 block"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="border rounded-lg p-2 w-full"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition disabled:opacity-50"
           >
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="border rounded-lg p-2 w-full"
-            placeholder="Enter your email"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="password"
-            className="text-sm font-medium text-gray-700 mb-1 block"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="border rounded-lg p-2 w-full"
-            placeholder="Enter your password"
-          />
-        </div>
-
-        <button
-          onClick={handleSubmit}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition disabled:opacity-50"
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
       </div>
     </div>
   );
