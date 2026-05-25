@@ -16,7 +16,9 @@ const Login = () => {
     try {
       const response = await fetch(`https://reqres.in/api/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          "x-api-key": "reqres_43e82a6778c14422a68c2f8f220735d3"
+        },
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
