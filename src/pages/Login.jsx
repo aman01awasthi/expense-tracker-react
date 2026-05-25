@@ -81,7 +81,6 @@ const Login = () => {
           </div>
 
           <button
-            onClick={handleSubmit}
             className="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition disabled:opacity-50"
           >
             {loading ? "Logging in..." : "Login"}
