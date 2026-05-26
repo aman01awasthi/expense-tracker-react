@@ -85,7 +85,7 @@ const Login = () => {
             {loading ? "Logging in..." : "Login"}
           </button>
 
-          <p className="text-xs text-gray-400 text-center mt-3">
+          <p className="text-xs text-gray-600 text-center mt-3">
             Use: eve.holt@reqres.in / cityslicka
           </p>
         </form>
