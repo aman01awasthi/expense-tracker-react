@@ -11,11 +11,16 @@ A full-stack React application to track personal expenses with real-time filteri
 - Filter expenses by category in real time
 - Running total updates automatically
 - Data persists on page refresh using localStorage
+- User authentication with JWT (via reqres.in)
+- Dark/light theme toggle persisted across session
+- Per-field form validation with error messages
+- Loading and error states on form submission
 
 ## Tech Stack
 - React 18 (Vite)
 - Tailwind CSS
 - localStorage for persistence
+- Context API (Auth + Theme)
 
 ## Concepts Used
 - useState — controlled inputs, CRUD state management
@@ -23,8 +28,14 @@ A full-stack React application to track personal expenses with real-time filteri
 - Props & callbacks — data flows down, events flow up
 - Derived state — filtered list and total calculated from source state
 - Lazy initializer — load localStorage before first render
+- useContext — global state for auth and theme
+- Custom hooks — useLocalStorage for persistent state
+- Async/await with try/catch — API calls and error handling
+- Fake API simulation — loading states without a real backend
 
 ## Components
+- Navbar — logout button, consumes AuthContext
+- Login — controlled form, POSTs to reqres.in API
 - `ExpenseForm` — controlled form for adding and editing expenses
 - `ExpenseList` — renders list of ExpenseItem components
 - `ExpenseItem` — displays individual expense with edit and delete

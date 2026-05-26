@@ -84,6 +84,10 @@ const Login = () => {
           <button className="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition disabled:opacity-50">
             {loading ? "Logging in..." : "Login"}
           </button>
+
+          <p className="text-xs text-gray-400 text-center mt-3">
+            Use: eve.holt@reqres.in / cityslicka
+          </p>
         </form>
       </div>
     </div>
