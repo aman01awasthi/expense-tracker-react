@@ -87,7 +87,7 @@ const ExpenseForm = ({ onAddExpense, onEditExpense, editExpense }) => {
           <p className="text-red-500 text-sm mb-3 text-center">{submitError}</p>
         )}
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="flex gap-3 items-end">
             <div className="flex-1">
               <label
@@ -150,7 +150,6 @@ const ExpenseForm = ({ onAddExpense, onEditExpense, editExpense }) => {
               )}
             </div>
             <button
-              onClick={handleSubmit}
               disabled={loading}
               className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition"
             >
