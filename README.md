@@ -42,6 +42,10 @@ A full-stack React application to track personal expenses with real-time filteri
 - `ExpenseTotal` — calculates and displays running total using reduce
 - `CategoryFilter` — filters expense list by category
 
+## Test Credentials
+- Email: eve.holt@reqres.in
+- Password: cityslicka
+
 ## Getting Started
 ```bash
 git clone https://github.com/aman01awasthi/expense-tracker
